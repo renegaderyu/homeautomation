@@ -3,6 +3,7 @@
 import os
 from weather import Weather
 from datetime import datetime
+import json
 
 __location_environment_variable__ = 'WOEID'
 
@@ -22,7 +23,14 @@ class QuickWeather(object):
         self.description = lookup.condition().text()
         self.temp = lookup.condition().temp()
         self.temp_f = ((int(lookup.condition().temp()) * (9 / 5)) + 32)
-        self.forecast = lookup.forecast()
+        self.forecast = {}
+        for item in lookup.forecast():
+            fdate = datetime.strptime(item.date(), "%d %b %Y").date().isoformat()
+            self.forecast[fdate] = {
+                'low': item.low(),
+                'high': item.high(),
+                'description': item.text()
+            }
         del lookup
         del weather
 
@@ -41,6 +49,16 @@ class QuickWeather(object):
     def reload_status(self):
         self.__init__()
 
-    def show_forecast(self):
-        for item in self.forecast:
-            print("{}: {}/{} {}".format(item.date(), item.low(), item.high(), item.text()))
+    def get_json(self):
+        rv = {}
+        rv['title'] = self.title
+        rv['units'] = self.units
+        rv['build_date'] = self.build_date.isoformat()
+        rv['sunset'] = self.sunset
+        rv['wind'] = self.wind
+        rv['atmosphere'] = self.atmosphere
+        rv['description'] = self.description
+        rv['temp'] = self.temp
+        rv['temp_f'] = self.temp_f
+        rv['forecast'] = self.forecast
+        return json.dumps(rv)
