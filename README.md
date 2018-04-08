@@ -1,5 +1,6 @@
 # HomeAutomation
 The beginnings of my homeautomation
+**Update** 2018-04-07 - shortly after I started this I found [home-assistant](https://www.home-assistant.io/), which runs on a RasPi and does a whole lot more than I originally imagined so I'll be leaving this behind and using that.
 
 ## Classes
 ### quickweather
