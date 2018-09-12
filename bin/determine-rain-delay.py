@@ -63,7 +63,7 @@ if __name__ == "__main__":
     GPIO.setmode(gpio_mode)
     GPIO.setup(pin, GPIO.OUT)
     # get weather
-    x = QuickWeather()
+    x = QuickWeather(location="2410383")
     forecast = json.loads(x.get_json())
     forecast = prepare_state(statefile, forecast)
     # determine rain_delay
