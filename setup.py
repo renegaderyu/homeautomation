@@ -12,7 +12,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='homeautomation',
-    version='0.55dev',
+    version='0.56dev',
     url='https://github.com/renegaderyu/homeautomation',
     author='Ryan Miguel',
     author_email='miguel.ryanj@gmail.com',

@@ -23,6 +23,8 @@ def rain_delay(myforecast, mypin):
         print("Ensuring rain delay is ON")
         GPIO.output(mypin, True)
         myforecast['last_status_check'] = True
+    else:
+        print("No state change necessary - doing nothing.")
     return myforecast
 
 
